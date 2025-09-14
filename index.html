@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú Principal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .menu button {
+      padding: 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s;
+    }
+    .menu button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📋 Menú Principal</h1>
+  <div class="menu">
+    <button onclick="window.location.href='formulario.html'">📝 Crear nueva boleta</button>
+    <button onclick="verHistorial()">📂 Ver historial</button>
+    <button onclick="abrirConfiguracion()">⚙️ Configuración</button>
+  </div>
+
+  <script>
+    function verHistorial() {
+      alert("Función de historial aún no implementada");
+    }
+
+    function abrirConfiguracion() {
+      alert("Función de configuración aún no implementada");
+    }
+  </script>
+</body>
+</html>

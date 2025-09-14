@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <div id="vistaPDF" style="display: none;"></div>
+
+    <style>
+        
+  body {
+    background-color: #f4f8fb;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 30px;
+  }
+
+  .contenedor {
+    max-width: 900px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    color: #007bff;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    margin-top: 30px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .btn-verde {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn-rojo {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .botones-final {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mantenimientos AC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+  <div id="boletaPDF">
+    <div style="text-align: right; font-weight: bold; font-size: 18px; margin-bottom: 10px;">
+      No: <span id="numeroBoleta">0001</span>
+    </div>
+
+    <div class="header">
+      <h1>📋 Mantenimientos de Aires Acondicionados</h1>
+      <div class="factura">
+        Factura Nº: <input type="text" id="factura">
+      </div>
+    </div>
+    <h2>Datos del Cliente</h2>
+
+<!-- Primera fila: Cliente y Dirección -->
+<div style="display: flex; gap: 40px; margin-bottom: 10px;">
+  <div style="flex: 1;">
+    <label for="cliente">Cliente:</label><br>
+    <input type="text" id="cliente" name="cliente" style="width: 100%;">
+  </div>
+  <div style="flex: 1;">
+    <label for="direccion">Dirección:</label><br>
+    <input type="text" id="direccion" name="direccion" style="width: 100%;">
+  </div>
+</div>
+
+<!-- Segunda fila: Teléfono y Fecha -->
+<div style="display: flex; gap: 40px;">
+  <div style="flex: 1;">
+    <label for="telefono">Teléfono:</label><br>
+    <input type="text" id="telefono" name="telefono" style="width: 100%;">
+  </div>
+  <div style="flex: 1;">
+    <label for="fecha">Fecha:</label><br>
+    <input type="date" id="fecha" name="fecha" style="width: 100%;">
+  </div>
+</div>
+
+<h2>📄 Certificados</h2>
+<div style="display: flex; gap: 40px;">
+  <div style="flex: 1;">
+    <label><input type="checkbox" id="certInstalacion"> Certificado de Instalación</label><br>
+    <label><input type="checkbox" id="certMantenimiento"> Certificado de Mantenimiento</label><br>
+  </div>
+  <div style="flex: 1;">
+    <label><input type="checkbox" id="certReparacion"> Certificado de Reparación</label><br>
+    <label><input type="checkbox" id="certArranque"> Certificado de Arranque</label><br>
+  </div>
+</div>
+
+
+    <h2>Tipo de Sistema</h2>
+    <label><input type="checkbox" name="sistema" value="Mini Split"> Mini Split</label><br>
+    <label><input type="checkbox" name="sistema" value="Ventana"> Ventana</label><br>
+    <label><input type="checkbox" name="sistema" value="Split Ductos"> Split Ductos</label><br>
+    <label><input type="checkbox" name="sistema" value="Paquetes"> Paquetes</label><br>
+    <label><input type="checkbox" name="sistema" value="VRV"> VRV</label><br>
+    <label><input type="checkbox" name="sistema" value="Fancoil"> Fancoil</label><br>
+    <label><input type="checkbox" name="sistema" value="Chiller"> Chiller</label><br>
+    <label><input type="checkbox" name="sistema" value="Capacidad de Equipo"> Capacidad de Equipo</label><br>
+    <label><input type="checkbox" name="sistema" value="Otros"> Otros</label><br>
+
+    <h2>⚙️ Datos del Sistema</h2>
+    <label>Tipo de sistema:
+      <select id="tipoSistema">
+        <option value="Mini Split">Mini Split</option>
+        <option value="Ventana">Ventana</option>
+        <option value="Paquete">Paquete</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </label><br>
+
+    <label>Marca: <input type="text" id="marca"></label><br>
+
+    <div class="fila-doble">
+      <label>Modelo EVAP: <input type="text" id="modeloEvap"></label>
+      <label>Serie EVAP: <input type="text" id="serieEvap"></label>
+    </div>
+
+    <div class="fila-doble">
+      <label>Modelo COND: <input type="text" id="modeloCond"></label>
+      <label>Serie COND: <input type="text" id="serieCond"></label>
+    </div>
+
+    <h2>⚡ Lecturas de Voltaje</h2>
+    <table id="tablaVoltajes">
+      <thead>
+        <tr>
+          <th>Voltages</th>
+          <th>Placas</th>
+          <th>Voltaje control</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" id="voltaje1" placeholder="Lectura"></td>
+          <td><input type="text" id="lugar1" value="L1-L2"></td>
+          <td><input type="text" id="control1"></td>
+          <td><button onclick="eliminarFila(this)">➖</button></td>
+        </tr>
+        <tr>
+          <td><input type="text" id="voltaje2" placeholder="Lectura"></td>
+          <td><input type="text" id="lugar2" value="L1-L2"></td>
+          <td><input type="text" id="control2"></td>
+          <td><button onclick="eliminarFila(this)">➖</button></td>
+        </tr>
+        <tr>
+          <td><input type="text" id="voltaje3" placeholder="Lectura"></td>
+          <td><input type="text" id="lugar3" value="L1-L2"></td>
+          <td><input type="text" id="control3"></td>
+          <td><button onclick="eliminarFila(this)">➖</button></td>
+        </tr>
+      </tbody>
+    </table>
+         <!-- Botones fuera del PDF -->
+  <button onclick="agregarFilaVoltaje()">➕ Agregar fila de voltaje</button>
+
+    <h2>🔍 Revisiones</h2>
+<div style="display: flex; justify-content: space-between; gap: 40px;">
+  <div>
+    <label><input type="checkbox" id="revisionGeneral"> Revisión general</label><br>
+    <label><input type="checkbox" id="revisionElectrica"> Alimentación eléctrica</label><br>
+    <label><input type="checkbox" id="revisionControl"> Control remoto o termostato</label><br>
+    <label><input type="checkbox" id="revisionBorneras"> Borneras, alimentación eléctrica motor</label><br>
+    <label><input type="checkbox" id="revisionEvap"> Motor evaporador</label><br>
+    <label><input type="checkbox" id="revisionCond"> Motor condensador</label><br>
+  </div>
+  <div>
+    <label><input type="checkbox" id="revisionCarga"> Cargar refrigerante</label><br>
+    <label><input type="checkbox" id="revisionDrenaje"> Drenaje de bandeja</label><br>
+    <label><input type="checkbox" id="revisionFiltro"> Filtro de aire</label><br>
+    <label><input type="checkbox" id="revisionSerpentin"> Serpentín</label><br>
+    <label><input type="checkbox" id="revisionTarjeta"> Tarjeta electrónica</label><br>
+    <label><input type="checkbox" id="revisionFiltroVisor"> Filtro deshidratador y visor</label><br>
+  </div>
+</div>
+
+<h2>🧾 Revisiones Generales</h2>
+<div style="display: flex; gap: 40px; margin-bottom: 20px;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+    <label style="display: flex; align-items: center; gap: 10px;">
+      <input type="checkbox" id="revisionCambioExtra">
+      <span>Existe algún cambio o extra al trabajo previsto</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 10px;">
+      <input type="checkbox" id="revisionLimpieza">
+      <span>Se limpió el lugar de trabajo al finalizar labores</span>
+    </label>
+  </div>
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+    <label style="display: flex; align-items: center; gap: 10px;">
+      <input type="checkbox" id="revisionExplicacion">
+      <span>Se explicó al cliente cómo utilizar el equipo</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 10px;">
+      <input type="checkbox" id="revisionEntrega">
+      <span>Se entrega control remoto, manual y certificados de trabajo</span>
+    </label>
+  </div>
+</div>
+
+
+    <h2 style="text-align: center; color: #007bff;">📝 Observaciones</h2>
+<div style="display: flex; justify-content: center;">
+  <textarea id="observaciones" rows="4" cols="50" placeholder="Escribe aquí las observaciones del servicio..." style="resize: none; padding: 10px; font-size: 16px;"></textarea>
+</div>
+
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mantenimientos AC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ... Tus estilos de arriba, sin cambios ... */
+  </style>
+  <!-- html2pdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="contenedor">
+    <div id="boletaPDF">
+      <!-- ... TODO tu contenido de la boleta aquí, sin cambios ... -->
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
+      <button onclick="guardarFormulario()" style="padding: 20px 40px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        ✅ Guardar
+      </button>
+      <button onclick="window.location.href='index.html'" style="padding: 20px 40px; font-size: 18px; background-color: #dc3545; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        ⬅️ Volver al menú principal
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor oculto para render limpio del PDF -->
+  <div id="vistaPDF" style="display: none;"></div>
+
+  <!-- Tu JS debe ir al final, cuando el DOM ya existe -->
+  <script src="app.js"></script>
+</body>
+</html>
